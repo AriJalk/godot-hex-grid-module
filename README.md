@@ -2,7 +2,8 @@
 
 Implementation of Hexagonal Grid in godot, based on the guide from Red Blob Games: https://www.redblobgames.com/grids/hexagons/</br>
 Built using custom godot build with my custom object pooling module: https://github.com/AriJalk/GodotNodePoolModule</br>
-Interface is made in the style of Dorfromantik hex placement.</br>
+Interface is made in the style of Dorfromantik hex placement.
+The grid expands (and can also shrink if needed) dynamically, adding a tile will also add the next available neighbor slots of the new hex, while removing a hex tile will remove neighbor slots that are no longer connected to a tile.</br>
 
 ## Controls
 
