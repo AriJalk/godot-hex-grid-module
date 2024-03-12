@@ -10,6 +10,6 @@ Interface is made in the style of Dorfromantik hex placement.
 * UI Undo button: Undo last action (it keeps track of both adding and removal so every state is reversible to the starting one no matter what actions were made)
 * WASD: Move camera (the camera bounds are limited by the size of the grid)
 
-## Pictures
+## In-Action
 
 ![HexGrid](ReadmeImages/HexGrid.gif)</br>
