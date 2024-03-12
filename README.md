@@ -12,4 +12,4 @@ Interface is made in the style of Dorfromantik hex placement.
 
 ## In-Action
 
-![HexGrid](ReadmeImages/HexGrid_demo.mp4)</br>
+![HexGrid](ReadmeImages/HexGrid_demo.gif)</br>
