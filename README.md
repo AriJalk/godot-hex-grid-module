@@ -3,7 +3,7 @@
 Implementation of Hexagonal Grid in godot, based on the guide from Red Blob Games: https://www.redblobgames.com/grids/hexagons/
 Interface is made in the style of Dorfromantik hex placement.
 
-##Controls
+## Controls
 
 * Mouse Left-Click on available slot: Add tile on slot and expand grid.
 * Mouse Right-Click on available slot: Remove tile from slot and shrink grid.
