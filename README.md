@@ -12,6 +12,4 @@ Interface is made in the style of Dorfromantik hex placement.
 
 ## Pictures
 
-Menu
-
 ![HexGrid](ReadmeImages/HexGrid.gif)</br>
