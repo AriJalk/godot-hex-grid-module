@@ -1,3 +1,4 @@
+# A hexagonal slot holding place for a tile node
 extends HexTile
 class_name HexSlot
 

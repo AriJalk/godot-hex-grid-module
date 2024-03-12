@@ -1,7 +1,7 @@
+# Node representing a placed hex tile on the map
 extends Node3D
 class_name HexTile
 
-@export var train_slot : Node3D
 var hex_data : Hex
 
 # Called when the node enters the scene tree for the first time.

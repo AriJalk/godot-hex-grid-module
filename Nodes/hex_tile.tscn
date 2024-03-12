@@ -12,10 +12,9 @@ top_radius = 0.1
 bottom_radius = 0.1
 height = 0.1
 
-[node name="HexTile" type="Node3D" node_paths=PackedStringArray("train_slot")]
+[node name="HexTile" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_bkb5o")
-train_slot = NodePath("")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 material_override = ExtResource("2_rggk1")

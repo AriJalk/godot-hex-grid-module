@@ -1,4 +1,5 @@
 class_name HexGrid
+# Based on https://www.redblobgames.com/grids/hexagons/
 
 enum HexDirections {
 	North = 0,
@@ -31,7 +32,7 @@ static func hex_scale(a : Hex, k : int)  -> Hex:
 	var new_tile = Hex.new(a.q * k, a.r * k, a.s * k)
 	return new_tile
 
-
+# Return neighbor hex in direction
 static func hex_neighbor(hex : Hex, direction : HexDirections) -> Hex:
 	return hex_add(hex, hex_directions_dictionary[direction])
 

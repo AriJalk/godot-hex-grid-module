@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvqmt4nua0p1c"]
+[gd_scene load_steps=8 format=3 uid="uid://dvqmt4nua0p1c"]
 
 [ext_resource type="Material" uid="uid://cvnexcae04fnr" path="res://Materials/background_material.tres" id="1_1aeqb"]
 [ext_resource type="Script" path="res://Nodes/placement_tile.gd" id="1_mgwqe"]
 [ext_resource type="Script" path="res://Engine/game_manager.gd" id="3_ka4ev"]
 [ext_resource type="Script" path="res://UserInterface/user_interface.gd" id="4_gtrbc"]
-[ext_resource type="Script" path="res://UserInterface/undo_control.gd" id="5_lyhdh"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_djp8a"]
 size = Vector2(50, 50)
@@ -55,7 +54,6 @@ anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 0
 theme = SubResource("Theme_hs46g")
-script = ExtResource("5_lyhdh")
 
 [node name="Panel" type="Panel" parent="UI/UndoControl"]
 layout_mode = 1

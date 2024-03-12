@@ -1,3 +1,4 @@
+# Contains all hex slots in the scene
 class_name HexDictionary
 
 var hex_array : HexArray

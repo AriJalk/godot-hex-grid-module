@@ -17,6 +17,21 @@ func _init(grid_node_ : Node3D, node_pool_ : NodePool) -> void:
 	_node_pool = node_pool_
 	_slot_dictionary = HexDictionary.new()
 
+# Update the min max positions after a tile was added or removed to set bounds in use for camera
+func _update_bounds_from_hex(hex: Hex) -> void:
+
+	var slot_position = HexGrid.hex_to_world(hex, 0.5, 0.1)
+	# Update the bounding box
+	if slot_position.x < min_x:
+		min_x = slot_position.x
+	if slot_position.x > max_x:
+		max_x = slot_position.x
+	if slot_position.z < min_z:
+		min_z = slot_position.z
+	if slot_position.z > max_z:
+		max_z = slot_position.z
+
+# Remove tile from given hex slot
 func remove_tile(hex : Hex) ->void:
 	var slot = _slot_dictionary.get_hex_slot(hex)
 	if slot != null && slot.hex_tile != null && hex.can_be_removed == true:
@@ -25,6 +40,7 @@ func remove_tile(hex : Hex) ->void:
 		slot.transperancy_mesh.visible = true
 		_remove_neighbor_slots(hex)
 
+# Add tile to given slot
 func add_tile(hex_data : Hex, slot : HexSlot) -> HexTile:
 	var tile = _node_pool.retrieve_prefab(GameManager.game_resources[HexTile]) as HexTile
 	if tile && slot.hex_tile == null:
@@ -46,6 +62,7 @@ func add_slot(hex_data: Hex) -> HexSlot:
 		_grid_node.add_child(slot)
 		var new_position = HexGrid.hex_to_world(hex_data, 0.5, 0.1)
 		slot.transform.origin = new_position
+		# add to slot dictionary
 		_slot_dictionary.add(slot)
 		slot.transperancy_mesh.visible = true
 		
@@ -55,18 +72,6 @@ func add_slot(hex_data: Hex) -> HexSlot:
 		return slot
 	return null
 
-func _update_bounds_from_hex(hex: Hex) -> void:
-
-	var slot_position = HexGrid.hex_to_world(hex, 0.5, 0.1)
-	# Update the bounding box
-	if slot_position.x < min_x:
-		min_x = slot_position.x
-	if slot_position.x > max_x:
-		max_x = slot_position.x
-	if slot_position.z < min_z:
-		min_z = slot_position.z
-	if slot_position.z > max_z:
-		max_z = slot_position.z
 
 func get_slot(hex) -> HexSlot:
 	return _slot_dictionary.get_hex_slot(hex)
@@ -97,6 +102,7 @@ func build_neighbor_slots(hex : Hex) -> void:
 		neighbor.neighbor_array.add(hex)
 	#print("Array size: ", hex.neighbor_array.size())
 
+# Remove neighbor slots that are not seperated
 func _remove_neighbor_slots(hex : Hex) -> void:
 	for direction in HexGrid.HexDirections.values():
 		var neighbor = HexGrid.hex_neighbor(hex, direction)
@@ -107,6 +113,7 @@ func _remove_neighbor_slots(hex : Hex) -> void:
 	if _is_hex_separated(hex):
 		remove_slot(hex)
 		
+
 func _is_hex_separated(hex: Hex, exclude_hex: Hex = null) -> bool:
 	var hex_slot = _slot_dictionary.get_hex_slot(hex)
 	if hex_slot != null && hex_slot.hex_tile != null:
