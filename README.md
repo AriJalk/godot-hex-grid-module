@@ -3,6 +3,8 @@
 Godot implementation of Hexagonal Grid in 3D space, based on the guide from Red Blob Games: https://www.redblobgames.com/grids/hexagons/
 Interface is made in the style of Dorfromantik hex placement.
 
+Built using custom Godot build with my custom object pooling module https://github.com/AriJalk/GodotNodePoolModule
+
 ## Controls
 
 * Mouse Left-Click on available slot: Add tile on slot and expand grid.
