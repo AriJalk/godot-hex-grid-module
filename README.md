@@ -1,7 +1,8 @@
 # GodotHexGridSystem
 
-Implementation of Hexagonal Grid in godot, based on the guide from Red Blob Games: https://www.redblobgames.com/grids/hexagons/
-Interface is made in the style of Dorfromantik hex placement.
+Implementation of Hexagonal Grid in godot, based on the guide from Red Blob Games: https://www.redblobgames.com/grids/hexagons/</br>
+Built using custom godot build with my custom object pooling module: https://github.com/AriJalk/GodotNodePoolModule</br>
+Interface is made in the style of Dorfromantik hex placement.</br>
 
 ## Controls
 
