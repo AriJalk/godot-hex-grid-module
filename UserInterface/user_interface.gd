@@ -1,5 +1,5 @@
-extends CanvasLayer
 class_name UserInterface
+extends CanvasLayer
 
 @export var undo_button : Button
 
