@@ -75,7 +75,7 @@ func _initialize_game() -> void:
 	var slot = _tile_manager.add_slot(hex)
 	_tile_manager.add_tile(hex)
 	# set placement tile to initial position
-	var placement_slot = _tile_manager.get_slot(HexGrid.hex_neighbor(hex, HexGrid.HexDirections.SOUTH))
+	var placement_slot = _tile_manager.get_slot(HexUtilities.hex_neighbor(hex, HexUtilities.HexDirections.SOUTH))
 	placement_slot.add_child(_placement_tile)
 	_placement_tile.hex = placement_slot.hex_data
 	

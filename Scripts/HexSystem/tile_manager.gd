@@ -13,7 +13,7 @@ var max_z : float
 
 var _grid_node : Node3D
 var _node_pool : NodePool
-var _slot_dictionary
+var _slot_dictionary : HexDictionary
 
 # Called when the node enters the scene tree for the first time. 
 func _init(grid_node_ : Node3D) -> void:
@@ -41,7 +41,7 @@ func add_tile(hex_data : Hex) -> HexTile:
 		slot.hex_tile = tile
 		slot.hex_data = hex_data
 		#tile.transform.origin = new_position
-		build_neighbor_slots(hex_data)
+		_build_neighbor_slots(hex_data)
 		slot.transperancy_mesh.visible = false
 		return tile
 	return null
@@ -51,7 +51,7 @@ func add_slot(hex_data: Hex) -> HexSlot:
 	if slot:
 		slot.hex_data = hex_data
 		_grid_node.add_child(slot)
-		var new_position = HexGrid.hex_to_world(hex_data, TILE_SIZE, TILE_GAP)
+		var new_position = HexUtilities.hex_to_world(hex_data, TILE_SIZE, TILE_GAP)
 		slot.transform.origin = new_position
 		_slot_dictionary.add(slot)
 		slot.transperancy_mesh.visible = true
@@ -64,7 +64,7 @@ func add_slot(hex_data: Hex) -> HexSlot:
 
 func _update_bounds_from_hex(hex: Hex) -> void:
 
-	var slot_position = HexGrid.hex_to_world(hex, TILE_SIZE, TILE_GAP)
+	var slot_position = HexUtilities.hex_to_world(hex, TILE_SIZE, TILE_GAP)
 	# Update the bounding box
 	if slot_position.x < min_x:
 		min_x = slot_position.x
@@ -86,6 +86,7 @@ func remove_slot(hex : Hex) -> void:
 			remove_tile(slot.hex_data)
 		_slot_dictionary.remove(slot)
 		_node_pool.return_node(GameManager.game_resources[HexSlot], slot)
+		# Recalculate bounds for min max, should really be solved with an ordered list as its too costly this way
 		_update_bounds_from_hex(hex)
 		min_x = 0
 		max_x = 0
@@ -95,9 +96,9 @@ func remove_slot(hex : Hex) -> void:
 			_update_bounds_from_hex(update_slot.hex_data)
 		#print(slot.hex_data," removed")
 
-func build_neighbor_slots(hex : Hex) -> void:
-	for direction in HexGrid.HexDirections.values():	
-		var neighbor = HexGrid.hex_neighbor(hex, direction)
+func _build_neighbor_slots(hex : Hex) -> void:
+	for direction in HexUtilities.HexDirections.values():	
+		var neighbor = HexUtilities.hex_neighbor(hex, direction)
 		if _slot_dictionary.get_hex_slot(neighbor) == null:
 			add_slot(neighbor)
 		hex.neighbor_array.add(neighbor)
@@ -105,8 +106,8 @@ func build_neighbor_slots(hex : Hex) -> void:
 	#print("Array size: ", hex.neighbor_array.size())
 
 func _remove_neighbor_slots(hex : Hex) -> void:
-	for direction in HexGrid.HexDirections.values():
-		var neighbor = HexGrid.hex_neighbor(hex, direction)
+	for direction in HexUtilities.HexDirections.values():
+		var neighbor = HexUtilities.hex_neighbor(hex, direction)
 		if _is_hex_separated(neighbor, hex):
 			remove_slot(neighbor)
 			hex.neighbor_array.remove(neighbor)
@@ -118,8 +119,8 @@ func _is_hex_separated(hex: Hex, exclude_hex: Hex = null) -> bool:
 	var hex_slot = _slot_dictionary.get_hex_slot(hex)
 	if hex_slot != null && hex_slot.hex_tile != null:
 		return false
-	for direction in HexGrid.HexDirections.values():
-		var neighbor = HexGrid.hex_neighbor(hex, direction)
+	for direction in HexUtilities.HexDirections.values():
+		var neighbor = HexUtilities.hex_neighbor(hex, direction)
 		var slot = _slot_dictionary.get_hex_slot(neighbor)
 		if slot != null && !neighbor.equals(exclude_hex):
 			if slot.hex_tile != null:
