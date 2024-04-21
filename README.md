@@ -3,6 +3,7 @@
 3D Hex Tile System for Godot, basic implementation of tile laying in games like Carcassone/Dorfromantik. Based on [Red Blob Games Hexagonal Grids](https://www.redblobgames.com/grids/hexagons).
 
 Was meant to be used for the initial Godot version of [Solo Train Game](https://github.com/AriJalk/SoloTrainGameUnity/) and was extracted from it.
+Uses the GD version of my Node Pooling module from [Object Pooling Module](https://github.com/AriJalk/ObjectPoolModule/)
 
 ## Features
 
