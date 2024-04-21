@@ -19,9 +19,9 @@ Was meant to be used for the initial Godot version of [Solo Train Game](https://
 
 - **Hex class:** Data representation of a hex using Cube Coordinates. Initialized with QRS coordinates.
 - **HexGrid class:** Provides static functions for handling hex logic and transformations. Main usage:
-  - `static func hex_to_world(hex: Hex, hex_size: float, gap_proportion: float, orientation: Orientation = Layout.layout_flat) -> Vector3`
-  - `static func hex_neighbor(hex: Hex, direction: HexDirections) -> Hex`
-- **TileManager class:** Game-oriented side of the system, handling creation and positioning of 3D HexTile nodes. Main usage:
+  - `static func hex_to_world(hex: Hex, hex_size: float, gap_proportion: float, orientation: Orientation = Layout.layout_flat) -> Vector3` : Get godot world coordinates according to the hex coordinates
+  - `static func hex_neighbor(hex: Hex, direction: HexDirections) -> Hex` : Get the coordinates of a neighbor to a hex.
+- **TileManager class:** Game-oriented side of the system, handling their creation and removal and also storing the hexes themselves. Main usage:
   - `func add_tile(hex_data: Hex) -> HexTile`: Adds a hex to the map if possible with the specified hex coordinates.
   - `func remove_tile(hex: Hex) -> void`: Removes a hex if it exists.
   - `func add_slot(hex_data: Hex) -> HexSlot`: Adds an empty slot for a hex.
