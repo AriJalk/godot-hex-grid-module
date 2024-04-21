@@ -8,6 +8,7 @@ Was meant to be used for the initial Godot version of [Solo Train Game](https://
 * Left click to add a tile to an available slot.
 * Right click to delete a tile from a slot if exists
 * Freeform dynamic map meaning islands of seperated hexes could be created without needing to store empty ones.
+* A Moving camera which is always bound to the limits of the map.
 
 ## Usage
 * The Hex class is data representation of a hex and uses Cube Coordinates and is the basis for the system.</br>
