@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://xlgss5f5k1rx"]
-
-[node name="train"]
-
-[node name="Cylinder_002" parent="." index="0"]
-transform = Transform3D(-2.18557e-08, 0, -0.5, 0, 0.5, 0, 0.5, 0, -2.18557e-08, 0, 0, 0)
