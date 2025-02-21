@@ -1,9 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://5cem3nxe88ll"]
+[gd_scene load_steps=9 format=3 uid="uid://5cem3nxe88ll"]
 
 [ext_resource type="Script" path="res://scripts/node_scripts/camera/rotated_camera.gd" id="2_h0wlf"]
 [ext_resource type="Script" path="res://scripts/engine/core/game_manager.gd" id="3_ab3ll"]
 [ext_resource type="Script" path="res://scripts/engine/ui/drag_control.gd" id="3_v87lx"]
 [ext_resource type="Script" path="res://scripts/engine/ui/input_manager.gd" id="4_2fw7u"]
+[ext_resource type="Script" path="res://scripts/node_scripts/light/orbit_boom.gd" id="5_1cxnc"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_8sru1"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_n64ux"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_yqn7e"]
 
 [node name="MapScene" type="Node3D"]
 
@@ -39,8 +46,27 @@ camera_radius = 4.5
 rotation_acceleration = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="RotatedCamera"]
-projection = 1
 current = true
 size = 3.0
 
 [node name="Grid" type="Node3D" parent="."]
+
+[node name="RotatingLight" type="Node3D" parent="." node_paths=PackedStringArray("orbit_node")]
+script = ExtResource("5_1cxnc")
+orbit_node = NodePath("DirectionalLight3D")
+orbit_radius = 3.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="RotatingLight"]
+light_energy = 0.5
+light_indirect_energy = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotatingLight/DirectionalLight3D"]
+mesh = SubResource("SphereMesh_8sru1")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotatingLight"]
+mesh = SubResource("CapsuleMesh_n64ux")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RotatingLight/MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -1.50167)
+mesh = SubResource("CylinderMesh_yqn7e")

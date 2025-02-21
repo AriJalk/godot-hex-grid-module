@@ -8,7 +8,7 @@ extends Node3D
 @export_range(0.1, 5) var movement_speed : float = 3
 @export var rotation_acceleration : float = 1
 
-var _horizontal_rotation : float
+var _horizontal_rotation : float = 90
 @onready var _currentRadius = camera_radius
 var _drag_vector : Vector2
 
@@ -19,7 +19,8 @@ func _ready():
 	drag_control.on_drag_signal.connect(_on_drag)
 	GlobalServices.signal_manager.key_movement.connect(_on_move)
 	GlobalServices.signal_manager.wheel_movement.connect(_on_scroll)
-	_on_drag(Vector2(135,0))
+	#TODO: actual reset
+	_set_position_on_circle()
 	
 func _physics_process(delta):
 	if _drag_vector != Vector2.ZERO:
@@ -30,12 +31,11 @@ func _physics_process(delta):
 		position += _movement_vector * delta * movement_speed
 		_movement_vector = Vector3.ZERO
 
-		
 	
 func _exit_tree():
 	drag_control.on_drag_signal.disconnect(_on_drag)
 	GlobalServices.signal_manager.key_movement.disconnect(_on_move)
-	
+	GlobalServices.signal_manager.wheel_movement.disconnect(_on_scroll)
 
 func _set_position_on_circle():
 	
