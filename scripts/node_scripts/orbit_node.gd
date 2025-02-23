@@ -1,27 +1,16 @@
+class_name OrbitNode
 extends Node3D
 
 @export var orbit_node : Node3D
-@export_range(0.1, 20) var orbit_radius : float
-@export_range(0.1, 100) var orbit_rotation_speed : float = 10
-@export_range(0.1, 100) var boom_rotation_speed : float = 1
+@export_range(0.1, 20) var orbit_radius : float = 4
 @export var rotation_axis_1 : int = Vector3.AXIS_X
 @export var rotation_axis_2 : int = Vector3.AXIS_Y
 
 @onready var _currentRadius = orbit_radius
 
-var _orbit_rotation : float = 0
-var _boom_rotation : float = 0
+var orbit_rotation : float = 0
 
 
-func _physics_process(delta):
-	_orbit_rotation += orbit_rotation_speed * delta
-	_set_position_on_circle()
-	
-	_boom_rotation += boom_rotation_speed * delta
-	_boom_rotation = _clamp_to_360_degrees(_boom_rotation)
-	rotate_y(deg_to_rad(_boom_rotation))
-	
-	
 static func _clamp_to_360_degrees(angle : float) -> float:
 	if angle < -360:
 		return angle + 360
@@ -42,18 +31,19 @@ static func _get_change_vector(rotation_axis : int, value : float) -> Vector3:
 			return Vector3.ZERO
 	
 
-func _set_position_on_circle():
+#Use current rotation value to rotate along the circle
+func set_position_on_circle(offset : Vector3 = Vector3.ZERO):
 	
-	_orbit_rotation = _clamp_to_360_degrees(_orbit_rotation)
+	orbit_rotation = _clamp_to_360_degrees(orbit_rotation)
 	
-	var radiansY = deg_to_rad(_orbit_rotation)
+	var radiansY = deg_to_rad(orbit_rotation)
 		
 	var axis1 = cos(radiansY) * _currentRadius
 	var axis2 = sin(radiansY) * _currentRadius
 	
 	var change_vector = _get_change_vector(rotation_axis_1, axis1)
 	change_vector += _get_change_vector(rotation_axis_2, axis2)
-	var new_position = global_position + change_vector
+	var new_position = global_position + change_vector + offset
 
 	orbit_node.global_position = new_position
 	
@@ -65,3 +55,4 @@ func _set_position_on_circle():
 		up_vector = direction.cross(alternative_up).normalized()
 	
 	orbit_node.look_at(global_position, up_vector)
+	
