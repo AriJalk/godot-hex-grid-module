@@ -1,7 +1,5 @@
 class_name HexUtilities
 
-#const Orientation = preload("res://scripts/hex_logic/data_scructures/orientation.gd")
-const Layout = preload("res://scripts/hex_logic/data_scructures/layout.gd")
 
 enum HexDirections {
 	NORTH = 0,
@@ -49,7 +47,7 @@ static func _calculate_gap(hex_size: float, gap_proportion: float) -> float:
 	return gap
 
 
-static func cube_to_world(q: int, r: int, hex_size: float, gap_proportion: float, orientation : Layout.Orientation = Layout.layout_flat) -> Vector3:
+static func cube_to_world(q: int, r: int, hex_size: float, gap_proportion: float, orientation : Orientation = Layout.layout_flat) -> Vector3:
 	var gap = _calculate_gap(hex_size, gap_proportion)
 	var x = (orientation.f0 * q + orientation.f1 * r) * hex_size
 	if x > 0:
@@ -66,7 +64,7 @@ static func cube_to_world(q: int, r: int, hex_size: float, gap_proportion: float
 
 	return Vector3(x, y, z)
 	
-static func hex_to_world(hex : HexUnit, hex_size: float, gap_proportion: float, orientation : Layout.Orientation = Layout.layout_flat) -> Vector3:
+static func hex_to_world(hex : HexUnit, hex_size: float, gap_proportion: float, orientation : Orientation = Layout.layout_flat) -> Vector3:
 	return cube_to_world(hex.q, hex.r, hex_size, gap_proportion, orientation)
 
 

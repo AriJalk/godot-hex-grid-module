@@ -1,6 +1,6 @@
 #Orientation of the hexagons
+class_name Orientation
 
-#class_name Orientation
 var f0 : float	
 var f1 : float
 var f2 : float

@@ -1,6 +1,5 @@
 #Layout of the hex grid
-#class_name Layout
-const Orientation = preload("res://scripts/hex_logic/data_scructures/orientation.gd")
+class_name Layout
 
 # Layout Constants for verticies.
 static var layout_pointy = Orientation.new(
