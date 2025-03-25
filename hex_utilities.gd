@@ -12,28 +12,28 @@ enum HexDirections {
 
 # Directions for flattop hexagon
 static var hex_directions_dictionary = {
-	HexDirections.NORTH : HexUnit.new(0, -1),
-	HexDirections.SOUTH : HexUnit.new(0, +1),
-	HexDirections.NORTH_WEST : HexUnit.new(-1, 0),
-	HexDirections.NORTH_EAST : HexUnit.new(+1, -1),
-	HexDirections.SOUTH_WEST : HexUnit.new(-1, +1),
-	HexDirections.SOUTH_EAST : HexUnit.new(+1, 0),
+	HexDirections.NORTH : HexCoord.new(0, -1),
+	HexDirections.SOUTH : HexCoord.new(0, +1),
+	HexDirections.NORTH_WEST : HexCoord.new(-1, 0),
+	HexDirections.NORTH_EAST : HexCoord.new(+1, -1),
+	HexDirections.SOUTH_WEST : HexCoord.new(-1, +1),
+	HexDirections.SOUTH_EAST : HexCoord.new(+1, 0),
 }
 
-static func hex_add(a: HexUnit, b: HexUnit) -> HexUnit:
-	var new_hex = HexUnit.new(a.q + b.q, a.r + b.r)
+static func hex_add(a: HexCoord, b: HexCoord) -> HexCoord:
+	var new_hex = HexCoord.new(a.q + b.q, a.r + b.r)
 	return new_hex
 
-static func hex_subtract(a: HexUnit, b: HexUnit) -> HexUnit:
-	var new_hex = HexUnit.new(a.q - b.q, a.r - b.r)
+static func hex_subtract(a: HexCoord, b: HexCoord) -> HexCoord:
+	var new_hex = HexCoord.new(a.q - b.q, a.r - b.r)
 	return new_hex
 
 
-static func hex_neighbor(hex : HexUnit, direction : HexDirections) -> HexUnit:
+static func hex_neighbor(hex : HexCoord, direction : HexDirections) -> HexCoord:
 	return hex_add(hex, hex_directions_dictionary[direction])
 
 
-static func equal_hex(test_name : String, hex_a : HexUnit, hex_b : HexUnit) -> bool:
+static func equal_hex(test_name : String, hex_a : HexCoord, hex_b : HexCoord) -> bool:
 	#print("HEX A: ", hex_a.q, ",",hex_a.r,",",hex_a.s)
 	#print("HEX B: ", hex_b.q, ",",hex_b.r,",",hex_b.s)
 	if hex_a.equals(hex_b):
@@ -64,11 +64,11 @@ static func cube_to_world(q: int, r: int, hex_size: float, gap_proportion: float
 
 	return Vector3(x, y, z)
 	
-static func hex_to_world(hex : HexUnit, hex_size: float, gap_proportion: float, orientation : Orientation = Layout.layout_flat) -> Vector3:
+static func hex_to_world(hex : HexCoord, hex_size: float, gap_proportion: float, orientation : Orientation = Layout.layout_flat) -> Vector3:
 	return cube_to_world(hex.q, hex.r, hex_size, gap_proportion, orientation)
 
 
-static func is_visited(hex : HexUnit, visited : Array[HexUnit]) -> bool:
+static func is_visited(hex : HexCoord, visited : Array[HexCoord]) -> bool:
 	for entry in visited:
 		if hex.equals(entry):
 			return true
@@ -76,7 +76,7 @@ static func is_visited(hex : HexUnit, visited : Array[HexUnit]) -> bool:
 	
 
 	
-static func hex_reachable(start: HexUnit, movement: int) -> HexArray:
+static func hex_reachable(start: HexCoord, movement: int) -> HexArray:
 	var visited: HexArray = HexArray.new()
 	var fringes: Array[HexArray] = []
 	var start_array: HexArray = HexArray.new()
@@ -93,8 +93,8 @@ static func hex_reachable(start: HexUnit, movement: int) -> HexArray:
 	return visited
 	
 	
-static func get_all_neighbors(hex : HexUnit) -> Array[HexUnit]:
-	var array : Array[HexUnit] = []
+static func get_all_neighbors(hex : HexCoord) -> Array[HexCoord]:
+	var array : Array[HexCoord] = []
 	for direction in hex_directions_dictionary.keys():
 		array.append(hex_neighbor(hex, direction))
 	return array
