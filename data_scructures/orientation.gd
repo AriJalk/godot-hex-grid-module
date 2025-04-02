@@ -1,5 +1,6 @@
 #Orientation of the hexagons
 class_name Orientation
+extends RefCounted
 
 var f0 : float	
 var f1 : float

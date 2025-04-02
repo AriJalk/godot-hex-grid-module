@@ -1,5 +1,6 @@
 #Layout of the hex grid
 class_name Layout
+extends RefCounted
 
 # Layout Constants for verticies.
 static var layout_pointy = Orientation.new(
