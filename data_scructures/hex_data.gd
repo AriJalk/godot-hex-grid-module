@@ -1,4 +1,4 @@
-# The base class for an hexagonal tile in the game
+# The base class for a logic tile with hexagonal coordinates
 class_name HexData
 extends RefCounted
 

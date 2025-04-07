@@ -3,7 +3,7 @@ class_name HexCoord
 extends RefCounted
 
 static var ZERO : HexCoord = new(0, 0)
-static var NULL : HexCoord = new(-999,999)
+static var NULL : HexCoord = new(-999,-999)
 
 static var _cache = {}
 
